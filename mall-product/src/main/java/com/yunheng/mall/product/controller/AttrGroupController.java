@@ -1,20 +1,14 @@
 package com.yunheng.mall.product.controller;
 
-import java.util.Arrays;
-import java.util.Map;
-
-//import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.yunheng.mall.product.entity.AttrGroupEntity;
-import com.yunheng.mall.product.service.AttrGroupService;
 import com.yunheng.common.utils.PageUtils;
 import com.yunheng.common.utils.R;
+import com.yunheng.mall.product.entity.AttrGroupEntity;
+import com.yunheng.mall.product.service.AttrGroupService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Map;
 
 
 
@@ -34,10 +28,10 @@ public class AttrGroupController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/{catelogId}")
     //@RequiresPermissions("product:attrgroup:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = attrGroupService.queryPage(params);
+    public R list(@RequestParam Map<String, Object> params, @PathVariable long catelogId){
+        PageUtils page = attrGroupService.queryPage(params, catelogId);
 
         return R.ok().put("page", page);
     }
